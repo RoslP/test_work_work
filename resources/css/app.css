@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container-wrapper {
+    margin: 0 60px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.authenticated-nav{
+    display: grid;
+    grid-template-columns: minmax(100px, 150px) minmax(300px, 1000px) minmax(100px, 200px);
+    column-gap: 40px;
+}
+.authenticated-nav__item{
+    display: inline-block;
+    text-align: center;
+}
+.content-container{
+    max-width: 1200px;
+}
+.add-blog__element{
+    background-color: #1fec0e;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 0 6px;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s ease ;
+}
+.add-blog__element:hover{
+    transform: scale(1.2);
+}
+.category-name__container{
+    display: flex;
+    flex-direction: row;
+    user-select: none;
+
+}
+.category-name__item{
+    margin: 5px;
+    background-color: rgba(107, 114, 128, 0.38);
+    padding: 2px;
+    cursor: pointer;
+}
+.item-category__selected{
+    background-color: #77e46c;
+    font-weight: bold;
+}
