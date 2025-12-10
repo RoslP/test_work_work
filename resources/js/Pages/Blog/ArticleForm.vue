@@ -2,6 +2,7 @@
 import {reactive, ref, onMounted} from 'vue'
 import ModalBlogEdit from "@/Components/Blog/ModalBlogEdit.vue";
 import axios from "axios";
+import SaveBlogData from "@/Components/Blog/SaveBlogData.vue";
 
 const isOpen = ref(false);
 
@@ -26,7 +27,16 @@ const blogEditForm = reactive({
     category: [],
 })
 
+const categoryIsCantSelect = ref(true)
+
 const selectOrDeselectCategory = ( id ) => {
+
+    blogEditForm.category.forEach((item, index) => {
+         if(item.selectedStatus === true && item.id !== id)
+
+        blogEditForm.category[index].selectedStatus = !blogEditForm.category[index].selectedStatus
+    });
+
     blogEditForm.category.forEach((item, index)=>{
         if (id === item.id){
             blogEditForm.category[index].selectedStatus = !blogEditForm.category[index].selectedStatus
@@ -62,10 +72,18 @@ onMounted(()=>{
                 </div>
             </div>
             <div>
-                <input placeholder="Заголовок статьи">
+                <input placeholder="Заголовок статьи"
+                v-model="blogEditForm.title"
+                >
+            </div>
+
+            <div>
+                <textarea class="blog--content" placeholder="Содержимое статьи"
+                v-model="blogEditForm.content"
+                ></textarea>
             </div>
             <div>
-                <textarea class="blog--content" placeholder="Содержимое статьи"></textarea>
+                <save-blog-data :dataToSave="blogEditForm"/>
             </div>
             <ModalBlogEdit :is-open="isOpen" @close="closeModal" @refreshCategoryList="getCategoryList"/>
         </section>

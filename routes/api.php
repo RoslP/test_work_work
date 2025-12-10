@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
@@ -26,4 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/category', function (){
         return CategoryResource::collection(Category::all())->resolve();
     });
+
+    Route::post('/article',[ArticleController::class, 'store']);
 });

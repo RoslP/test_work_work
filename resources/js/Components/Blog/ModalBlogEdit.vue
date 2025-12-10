@@ -19,8 +19,8 @@ const categoryName = ref('')
 const saveCategory = (async () => {
     if (String(categoryName.value).trim() === '')
         return alert('Введите название категории')
-    if (String(categoryName.value).length <= 3)
-        return alert('Название должно быть более 3х символов')
+    if (String(categoryName.value).length < 3)
+        return alert('Название должно хотя бы 3 символа')
     if (/\d/.test(categoryName.value) || /[..\-\!\*\<\>\,\/\&\^+?^${}()|[\]\\]/.test(categoryName.value))
         return alert('Строка содержит спецсимволы или цифры!')
 
