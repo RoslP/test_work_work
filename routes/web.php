@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -37,9 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/post-create',function (){
         return Inertia::render('Dashboard',['currentPage'=>'create']);
     })->name('post.create');
-    Route::get('/post-list',function (){
-        return Inertia::render('Dashboard',['currentPage'=>'articles']);
-    })->name('post.list');
+    Route::get('/post-list', [ArticleController::class, 'index'])->name('post.list');
 });
 
 require __DIR__.'/auth.php';
