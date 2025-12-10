@@ -2,11 +2,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head, Link} from '@inertiajs/vue3';
 import ArticleList from "@/Pages/Blog/ArticleList.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import ArticleForm from "@/Pages/Blog/ArticleForm.vue";
 
 const props = defineProps({
-    currentPage: String
+    currentPage: String,
+    articles: Array
 })
 const currentPage = ref('articles');
 </script>
@@ -44,8 +45,11 @@ const currentPage = ref('articles');
                     </div>
                 </div>
             </div>
-            <div v-if="props.currentPage === 'articles'">
-                <ArticleList/>
+            <div
+
+                v-if="props.currentPage === 'articles'"
+            >
+                <ArticleList :articles="articles"/>
             </div>
             <div v-else-if="props.currentPage === 'create'">
                 <ArticleForm/>
