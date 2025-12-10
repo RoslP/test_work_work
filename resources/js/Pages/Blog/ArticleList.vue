@@ -1,5 +1,6 @@
 <script setup>
 import {defineProps} from 'vue'
+import {Link} from '@inertiajs/vue3';
 
 const props = defineProps({
     articles: {
@@ -19,7 +20,9 @@ const props = defineProps({
             <div class="articles-storage">
                 <div class="article-title">
                     <div>
-                        {{ article.title }}
+                        <Link :href="route('post.show',{title: article.title})">
+                            {{ article.title }}
+                        </Link>
                     </div>
                 </div>
                 <div class="article-category-name">

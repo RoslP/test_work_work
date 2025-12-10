@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Dashboard',['currentPage'=>'create']);
     })->name('post.create');
     Route::get('/post-list', [ArticleController::class, 'index'])->name('post.list');
+
+    Route::get('/post/{title}',[ArticleController::class,'show'])->name('post.show');
 });
 
 require __DIR__.'/auth.php';

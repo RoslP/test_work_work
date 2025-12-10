@@ -8,6 +8,7 @@ use App\Http\Resources\ArticleResource;
 use App\Repositories\ArticleRepository;
 use App\Services\ArticleService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -34,5 +35,12 @@ class ArticleController extends Controller
         $articles = ArticleResource::collection($this->articleRepository->getArticlesForIndexArticlePage());
 
         return Inertia::render('Dashboard', ['currentPage' => 'articles', 'articles' => $articles]);
+    }
+
+    public function show(Request $request): Response
+    {
+        $article = $this->articleRepository->getArticleByName($request->title);
+
+        return Inertia::render('Dashboard', ['currentPage' => 'show', 'article' => $article]);
     }
 }

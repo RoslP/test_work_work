@@ -4,10 +4,12 @@ import {Head, Link} from '@inertiajs/vue3';
 import ArticleList from "@/Pages/Blog/ArticleList.vue";
 import {onMounted, ref} from "vue";
 import ArticleForm from "@/Pages/Blog/ArticleForm.vue";
+import ShowForm from "@/Pages/Blog/ShowForm.vue";
 
 const props = defineProps({
     currentPage: String,
-    articles: Array
+    articles: Array,
+    article: Array,
 })
 const currentPage = ref('articles');
 </script>
@@ -53,6 +55,9 @@ const currentPage = ref('articles');
             </div>
             <div v-else-if="props.currentPage === 'create'">
                 <ArticleForm/>
+            </div>
+            <div v-else-if="props.currentPage === 'show'">
+                <ShowForm :article="props.article"/>
             </div>
         </section>
     </AuthenticatedLayout>
