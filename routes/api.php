@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Article\ArticleController;
-use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Article\CategoryController;
+use App\Http\Controllers\Article\CommentController;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -29,4 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/article',[ArticleController::class, 'store']);
+
+//    ->middleware('throttle:5,1')
+    Route::post('/comment',[CommentController::class, 'store']);
 });

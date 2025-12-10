@@ -29,7 +29,7 @@ class ArticleRepository
     public function getArticleByName(string $title): Article|Model
     {
         return Article::where('title', $title)
-            ->select(['title','content','users.name as author', 'categories.name as name'])
+            ->select(['articles.id as id','title','content','users.name as author', 'categories.name as name'])
             ->join('categories', 'categories.id', '=', 'articles.category_id')
             ->join('users', 'users.id', '=', 'articles.author_id')
             ->first();

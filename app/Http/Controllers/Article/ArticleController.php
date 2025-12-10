@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Blog\ArticleRequest;
+use App\Http\Requests\Article\ArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Repositories\ArticleRepository;
 use App\Services\ArticleService;
@@ -41,6 +41,6 @@ class ArticleController extends Controller
     {
         $article = $this->articleRepository->getArticleByName($request->title);
 
-        return Inertia::render('Dashboard', ['currentPage' => 'show', 'article' => $article]);
+        return Inertia::render('Dashboard', ['currentPage' => 'show', 'article' => $article,'currentUserId'=>auth()->user()->id]);
     }
 }

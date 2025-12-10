@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Blog\StoreCategoryNameRequest;
+use App\Http\Requests\Article\StoreCategoryNameRequest;
 use App\Http\Resources\CategoryResource;
 use App\Services\CategoryService;
 use Illuminate\Http\JsonResponse;

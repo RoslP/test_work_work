@@ -10,6 +10,7 @@ const props = defineProps({
     currentPage: String,
     articles: Array,
     article: Array,
+    currentUserId: Number,
 })
 const currentPage = ref('articles');
 </script>
@@ -57,7 +58,7 @@ const currentPage = ref('articles');
                 <ArticleForm/>
             </div>
             <div v-else-if="props.currentPage === 'show'">
-                <ShowForm :article="props.article"/>
+                <ShowForm :article="props.article" :current-user-id="props.currentUserId"/>
             </div>
         </section>
     </AuthenticatedLayout>
