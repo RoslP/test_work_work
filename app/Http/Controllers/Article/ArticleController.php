@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\ArticleRequest;
+use App\Http\Requests\Article\FindArticleByCategoryNameRequest;
 use App\Http\Resources\ArticleResource;
 use App\Repositories\ArticleRepository;
 use App\Services\ArticleService;
@@ -44,5 +45,21 @@ class ArticleController extends Controller
         $article = $this->articleRepository->getArticleByName($request->title);
 
         return Inertia::render('Dashboard', ['currentPage' => 'show', 'article' => $article,'currentUserId'=>auth()->user()->id]);
+    }
+    public function findByName(string $name): JsonResponse
+    {
+        return response()->json($this->articleRepository->findByName($name));
+    }
+
+    public function findAll(): JsonResponse
+    {
+        return response()->json($this->articleRepository->getArticlesForIndexArticlePage());
+    }
+
+    public function findByCategory(FindArticleByCategoryNameRequest $request): JsonResponse
+    {
+        $categories = $request->validated();
+
+        return response()->json($this->articleRepository->findByCategory($categories['categories']));
     }
 }

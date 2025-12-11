@@ -35,4 +35,22 @@ class ArticleRepository
             ->join('users', 'users.id', '=', 'articles.author_id')
             ->first();
     }
+
+    public function findByName(string $name): Collection|null
+    {
+        return Article::where('title','LIKE' ,"%{$name}%")
+            ->select(['articles.id as id','title','content','users.name as author', 'categories.name as name'])
+            ->join('categories', 'categories.id', '=', 'articles.category_id')
+            ->join('users', 'users.id', '=', 'articles.author_id')
+            ->get();
+    }
+
+    public function findByCategory(array $category): Collection
+    {
+        return Article::whereIn('categories.name', $category)
+            ->select(['articles.id as id','title','content','users.name as author', 'categories.name as name'])
+            ->join('categories', 'categories.id', '=', 'articles.category_id')
+            ->join('users', 'users.id', '=', 'articles.author_id')
+            ->get();
+    }
 }
