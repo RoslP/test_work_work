@@ -30,9 +30,11 @@ class ArticleController extends Controller
         }
     }
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $articles = ArticleResource::collection($this->articleRepository->getArticlesForIndexArticlePage());
+        $page = $request->query('page', 1);
+
+        $articles = $this->articleRepository->getArticlesForIndexArticlePage();
 
         return Inertia::render('Dashboard', ['currentPage' => 'articles', 'articles' => $articles]);
     }

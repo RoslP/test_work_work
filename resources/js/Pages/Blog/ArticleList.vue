@@ -1,6 +1,7 @@
 <script setup>
 import {defineProps} from 'vue'
 import {Link} from '@inertiajs/vue3';
+import Paginator from "@/Components/Blog/Paginator.vue";
 
 const props = defineProps({
     articles: {
@@ -12,6 +13,11 @@ const props = defineProps({
 </script>
 
 <template>
+
+
+    <div class="article-paginator">
+        <paginator :articles="articles"/>
+    </div>
     <div
         v-for="(article,key) in articles.data"
         :key="key"
@@ -35,6 +41,9 @@ const props = defineProps({
                 </div>
             </div>
         </div>
+    </div>
+    <div class="article-paginator">
+        <paginator :articles="articles"/>
     </div>
 </template>
 
