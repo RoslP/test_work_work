@@ -13,6 +13,7 @@ const savePostComment = async () => {
     await axios.post('/api/comment',{user_id:props.currentUserId, content: commentData.value, article_id:props.articleId})
         .then(()=>{
             getCommentData()
+            commentData.value = ''
         })
 }
 
