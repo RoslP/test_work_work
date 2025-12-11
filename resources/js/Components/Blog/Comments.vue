@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 axios.defaults.withCredentials = true
 
@@ -10,8 +10,24 @@ const props = defineProps({
 
 const commentData = ref('')
 const savePostComment = async () => {
-    await axios.post('/api/comment',{user_id:props.currentUserId, content: commentData.value, article_id:props.currentUserId})
+    await axios.post('/api/comment',{user_id:props.currentUserId, content: commentData.value, article_id:props.articleId})
+        .then(()=>{
+            getCommentData()
+        })
 }
+
+const getCommentData = ()=>{
+    axios.get('/api/comments/' + props.articleId)
+        .then(d =>{
+            commentsData.value = d.data
+        })
+}
+
+const commentsData = ref([])
+
+onMounted(() => {
+    getCommentData()
+})
 </script>
 
 <template>
@@ -36,7 +52,15 @@ const savePostComment = async () => {
         </form>
 
         <div class="comments-list" aria-live="polite">
-            <div class="comment-item"><span style="font-weight: bold">Pavel:</span> Пример комментария: здесь показан</div>
+            <div class="comment-item"
+                 v-for="(commentData, id) in commentsData"
+                 :key="id"
+            >
+                <div>
+                    <span style="font-weight: bold">{{ commentData.author }}</span> {{ commentData.comment }}
+                </div>
+                <div class="comment-date">{{ commentData.created_at }}</div>
+            </div>
         </div>
     </section>
 

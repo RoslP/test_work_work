@@ -31,6 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/article',[ArticleController::class, 'store']);
 
-//    ->middleware('throttle:5,1')
-    Route::post('/comment',[CommentController::class, 'store']);
+    Route::post('/comment',[CommentController::class, 'store'])->middleware('throttle:5,1');
+    Route::get('/comments/{article_id}', [CommentController::class, 'show']);
 });
