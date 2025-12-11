@@ -72,8 +72,8 @@ class ArticleController extends Controller
 
     public function update(int $id, ArticleRequest $articleRequest): JsonResponse
     {
-        $this->articleRepository->updateArticleById($id, $articleRequest->validated());
+       $article=  $this->articleRepository->updateArticleById($id, $articleRequest->validated());
 
-        return response()->json();
+        return response()->json($article->title);
     }
 }

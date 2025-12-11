@@ -59,8 +59,10 @@ class ArticleRepository
        return Article::destroy($id);
     }
 
-    public function updateArticleById(int $id, array $data): bool|int
+    public function updateArticleById(int $id, array $data)
     {
-        return Article::where('id', $id)->update($data);
+        $article = Article::findOrFail($id);
+        $article->update($data);
+        return $article;
     }
 }

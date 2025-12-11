@@ -24,6 +24,7 @@ const getCategoryList = async () => {
             articleCategories.category.forEach((item, index) =>{
                 if (item.name===props.article.name){
                     articleCategories.category[index].selectedStatus = true
+                    articleCopy.category_id = articleCategories.category[index].id
                 }
             })
         });
@@ -65,8 +66,10 @@ const editArticle = async () => {
     console.log(articleCopy)
     await axios.put('/api/articles/' + articleCopy.id, { ...articleCopy })
 
-        .then(() => {
-                window.location.reload()
+        .then(res => {
+            console.log(res)
+
+            window.location.href = `http://localhost:8876/post/${encodeURIComponent(res.data)}`;
             }
         )
 }
