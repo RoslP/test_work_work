@@ -1,22 +1,61 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import {Head, Link} from '@inertiajs/vue3';
+import ArticleList from "@/Pages/Blog/ArticleList.vue";
+import {onMounted, ref} from "vue";
+import ArticleForm from "@/Pages/Blog/ArticleForm.vue";
+import ShowForm from "@/Pages/Blog/ShowForm.vue";
+
+const props = defineProps({
+    currentPage: String,
+    articles: Array,
+    article: Array,
+    currentUserId: Number,
+})
+const currentPage = ref('articles');
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template>
+        <section class="article">
+            <div class="container-wrapper">
+                <div class="content-container">
+                    <div class="authenticated-nav">
+                        <div class="authenticated-nav__item">
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
+                            <Link
+                                :href="route('post.create')"
+                                class="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >Добавить статью
+                            </Link
+                            >
+                        </div>
+                        <div
+                            class="authenticated-nav__item ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                            <Link
+                                :href="route('post.list')"
+                                class="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >Статьи
+                            </Link
+                            >
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div
+
+                v-if="props.currentPage === 'articles'"
+            >
+                <ArticleList :articles="articles"/>
+            </div>
+            <div v-else-if="props.currentPage === 'create'">
+                <ArticleForm/>
+            </div>
+            <div v-else-if="props.currentPage === 'show'">
+                <ShowForm :article="props.article" :current-user-id="props.currentUserId"/>
+            </div>
+        </section>
     </AuthenticatedLayout>
 </template>
