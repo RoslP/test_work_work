@@ -18,7 +18,7 @@ class CommentResource extends JsonResource
             'id' => $this->id,
             'comment' => $this->comment,
             'author' => $this->author,
-            'created_at'=>$this->created_at->addHours(10)->format('H:i d.m.Y'),
+            'created_at'=>$this->created_at->format('H:i d.m.Y'),
         ];
     }
 }
