@@ -27,8 +27,6 @@ const blogEditForm = reactive({
     category: [],
 })
 
-const categoryIsCantSelect = ref(true)
-
 const selectOrDeselectCategory = ( id ) => {
 
     blogEditForm.category.forEach((item, index) => {
@@ -43,8 +41,6 @@ const selectOrDeselectCategory = ( id ) => {
         }
     })
 }
-
-
 
 onMounted(()=>{
     getCategoryList()

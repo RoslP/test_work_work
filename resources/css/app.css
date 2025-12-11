@@ -328,7 +328,6 @@ body {
 .filter-container {
     position: sticky;
     top: 0; /* приклеивается к верху */
-    z-index: 100; /* чтобы быть над контентом */
     background: white; /* чтобы перекрывать контент при скролле */
     padding: 10px 10px;
     border-bottom: 1px solid #ddd;
@@ -405,3 +404,38 @@ body {
     border-color: #007bff;
     color: white;
 }
+.edit-form__grid{
+    display: grid;
+    grid-template-columns: 10fr 5fr;
+}
+
+.edit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    background: #2563eb;       /* синий */
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #1d4ed8;
+}
+
+.edit-btn:active {
+    background: #1e40af;
+}
+
+.edit-btn:focus {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+

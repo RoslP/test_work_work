@@ -53,4 +53,14 @@ class ArticleRepository
             ->join('users', 'users.id', '=', 'articles.author_id')
             ->get();
     }
+
+    public function deleteArticleById(int $id): bool
+    {
+       return Article::destroy($id);
+    }
+
+    public function updateArticleById(int $id, array $data): bool|int
+    {
+        return Article::where('id', $id)->update($data);
+    }
 }

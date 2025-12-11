@@ -62,4 +62,18 @@ class ArticleController extends Controller
 
         return response()->json($this->articleRepository->findByCategory($categories['categories']));
     }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $this->articleRepository->deleteArticleById($id);
+
+        return response()->json();
+    }
+
+    public function update(int $id, ArticleRequest $articleRequest): JsonResponse
+    {
+        $this->articleRepository->updateArticleById($id, $articleRequest->validated());
+
+        return response()->json();
+    }
 }

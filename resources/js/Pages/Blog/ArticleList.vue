@@ -41,7 +41,9 @@ const selectOrDeselectCategory = (id) => {
     if (currentSelectedCategory.value.length === 0){
          getAllArticles()
     }
-    searchByCategory(currentSelectedCategory.value)
+    else{
+        searchByCategory(currentSelectedCategory.value)
+    }
 }
 
 const searchByCategory = async (arrayOfNames) => {

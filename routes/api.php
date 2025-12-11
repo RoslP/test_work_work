@@ -33,6 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/article/{title}', [ArticleController::class, 'findByName']);
     Route::get('/articles-all', [ArticleController::class, 'findAll']);
     Route::post('/articles/category', [ArticleController::class, 'findByCategory']);
+    Route::delete('/articles/{title}', [ArticleController::class, 'destroy']);
+    Route::put('/articles/{id}', [ArticleController::class, 'update']);
 
     Route::post('/comment',[CommentController::class, 'store'])->middleware('throttle:5,1');
     Route::get('/comments/{article_id}', [CommentController::class, 'show']);
