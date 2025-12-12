@@ -24,6 +24,7 @@ services:
           - "host.docker.internal:host-gateway"
       depends_on:
           - db
+          - meilisearch
       container_name: app-test
       networks:
           - test
@@ -56,6 +57,21 @@ services:
     networks:
       - test
 
+  meilisearch:
+    image: getmeili/meilisearch:v1.16
+    environment:
+        MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+    volumes:
+        - meilidata:/meilidata
+    ports:
+        - "7700:7700"
+    container_name: meilisearch-test
+    networks:
+        - test
+
 networks:
    test:
     driver: bridge
+
+volumes:
+    meilidata:
