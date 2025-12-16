@@ -25,6 +25,7 @@ services:
       depends_on:
           - db
           - meilisearch
+          - redis
       container_name: app-test
       networks:
           - test
@@ -69,9 +70,29 @@ services:
     networks:
         - test
 
+  redis:
+      image: redis:7-alpine
+      container_name: redis-test
+      volumes:
+          - redisdata:/data
+      command: redis-server --appendonly yes
+      networks:
+          - test
+
+  redisinsight:
+      image: redis/redisinsight:latest
+      container_name: redisinsight-test
+      ports:
+          - "5540:5540"
+      depends_on:
+          - redis
+      networks:
+          - test
+
 networks:
    test:
     driver: bridge
 
 volumes:
     meilidata:
+    redisdata:

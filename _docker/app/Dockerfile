@@ -13,16 +13,16 @@ RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.
     && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
 COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
-# Устанавливаем Node и npm (через apt)
 RUN apt-get update && apt-get install -y nodejs npm \
     && npm install -g npm@latest
 
-# Устанавливаем Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
-# Рабочая директория
 WORKDIR /var/www
 
