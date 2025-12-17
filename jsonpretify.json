@@ -1,0 +1,7 @@
+{
+    "worker": {
+        "name": "oleg",
+        "age": 30,
+        "job": "programmer"
+    }
+}
