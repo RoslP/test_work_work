@@ -2,7 +2,11 @@ FROM php:8.3-fpm
 
 RUN apt-get update \
     && apt-get install -y apt-utils libpq-dev libpng-dev libzip-dev zip unzip git grep nodejs npm procps \
+    libmagickwand-dev libjpeg-dev libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql bcmath gd zip pcntl \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

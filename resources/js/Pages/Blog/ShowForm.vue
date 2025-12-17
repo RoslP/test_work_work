@@ -2,6 +2,7 @@
 import {defineProps, reactive, ref} from "vue";
 import Comments from "@/Components/Blog/Comments.vue";
 import axios from "axios";
+import UploadPhotos from "@/Components/Blog/UploadPhotos.vue";
 
 const props = defineProps({
     article: {
@@ -119,6 +120,7 @@ const editArticle = async () => {
                     </span>
                     </div>
                     <textarea placeholder="Контент" v-model="articleCopy.content"></textarea>
+                    <upload-photos/>
                     <div>
                         <button type="button" style="margin-top: 15px" class="save-btn"
                         @click="editArticle"
