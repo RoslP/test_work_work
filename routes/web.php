@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Article\ArticleController;
+use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestJobController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,5 +44,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/post/{title}',[ArticleController::class,'show'])->name('post.show');
 });
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::post('/post', [PostController::class, 'store']);
+
+Route::get('/test-job-route',[TestJobController::class,'test']);
 
 require __DIR__.'/auth.php';
